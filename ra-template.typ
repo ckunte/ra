@@ -10,25 +10,24 @@
       title
     ),
   )
-  // Set para to justify
-  // Configure paragraph properties.
+  // Configure paragraph properties
   set par(leading: 0.65em, first-line-indent: 12pt, justify: true)
   show par: set block(spacing: 0.65em)
   set text(
-    font: "erewhon", // Source serif Pro
+    font: "New Computer Moden", // Source serif Pro
     top-edge: "cap-height", 
     bottom-edge: "baseline",
     number-type: "old-style",
     size: 10pt,
   )
-  // Heading show rules.
+  // Document in two columns
   columns(2, doc)
 }
 
 // Rental Agreement Details (rad)
 // Parties and Date of commencement -> PLEASE INPUT / EDIT / UPDATE
 #let rad = (
-  // lessor details
+  // lessor's details
   lessor: [
     #smallcaps[_[lessor's name]_], 
     aged _[lessor's age]_, 
@@ -39,7 +38,7 @@
   property: [
     _[propery]_
   ],
-  // lessee details
+  // lessee's details
   lessee: [
     #smallcaps[_[lessee's name]_],
     aged _[lessee's age]_, 
@@ -50,8 +49,10 @@
   dte: [_[end date]_],
   rent: [_[rent/mo.]_],
   depo: [_[deposit]_],
+  city: [_[city]_],
+  state: [_[state]_]
 )
-#let (lessor, lessee, property, dtc, dte, rent, depo) = rad
+#let (lessor, lessee, property, dtc, dte, rent, depo, city, state) = rad
 //
 #show: doc => lease_agreement(
   [Lease Agreement],
@@ -61,11 +62,11 @@
   set block(below: 10pt)
   set text(weight: "regular")
   align(left, smallcaps(it))
-}  
+}
 // BODY OF LEASE AGREEMENT TEXT FROM HERE-ON
 = #h(1fr) Lease Agreement #h(1fr)
 
-This agreement is made on #datetime.today().display("[month repr:long] [day], [year]") in _[city]_, _[state]_
+This agreement is made on #datetime.today().display("[month repr:long] [day], [year]") in #city, #state
 
 #v(1%)
 #h(1fr) #smallcaps[between] #h(1fr)
@@ -156,7 +157,7 @@ In case of any disputes or disagreements, both parties shall first attempt to re
 
 == Force majeure
 
-In the event that either party is unable to fulfil its obligations due to circumstances beyond their control (such as acts of God, natural disasters, government actions), the affected party shall be excused from such obligations during the period of disruption.
+In the event that either party is unable to fulfill its obligations due to circumstances beyond their control (such as acts of God, natural disasters, government actions), the affected party shall be excused from such obligations during the period of disruption.
 
 == Indemnity
 
